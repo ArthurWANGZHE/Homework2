@@ -7,9 +7,14 @@ df_train = pd.read_csv('train.csv')
 # 42000 rows * 785 columns (783个变量，1个标签，1个序号）
 df_answer = pd.read_csv('标准答案.csv')
 # print(df_train)
-
+df_test = np.array(df_test)
+df_train = np.array(df_train)
 df_answer = np.array(df_answer)
 answer = []
+df_answer = np.array(df_answer)
 for i in range(28000):
     answer.append(df_answer[i][1])
 print(answer)
+
+print(df_train)
+print(df_train[1][0])
