@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
+import time
 
+T1 = time.time()
 df_test = pd.read_csv('test.csv')
 # 28000 rows * 784 columns (783个变量，1个序号）
 df_train = pd.read_csv('train.csv')
@@ -32,7 +34,7 @@ caculate_distance(df_test[0], df_train[0])
 # print(df_train[0])
 
 labeltest = []
-for i in range(1):
+for i in range(100,200):
     distance = []
     labelTrain = []
     for j in range(42000):
@@ -46,14 +48,15 @@ for i in range(1):
         b = distance.index(a)
         ad.append(a)
         ar.append(df_train[b][0])
-    S = 1
+    S = 0
     S_ = 0
-    for i in range(5):
+    for i in range(1):
         a_ = ad[i] * ar[i]
-        S = S * a_
+        S = S + a_
+#        print(S)
         S_ = S_ + ad[i]
+ #       print(S_)
     labelType = S / S_
-    print(labelType)
     if labelType <= 0.5:
         labeltest.append(0)
     elif labelType <= 1.5 and labelType > 0.5:
@@ -74,14 +77,16 @@ for i in range(1):
         labeltest.append(8)
     elif labelType <= 9.5 and labelType > 8.5:
         labeltest.append(9)
-print(labeltest)
-print("stage2")
-"""
-correct = 0
-for i in range(28000):
-    if labeltest[i] == answer[i]:
-        correct += 1
+# print(labeltest)
+# print("stage2")
 
-print(correct / 28000)
+correct = 0
+for i in range(100):
+    if labeltest[i] == answer[i+100]:
+        correct += 1
+print(labeltest)
+print(answer)
+print(correct / 100)
 print("finish")
-"""
+T2 = time.time()
+print('程序运行时间:%s毫秒' % ((T2 - T1)*1000))
